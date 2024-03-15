@@ -3,6 +3,10 @@ import random
 
 class WordleGame:
     def __init__(self):
+        '''
+        Initializes the Wordle game instance by loading a list of five-letter words
+        from an online resource and selecting one at random as the target word.
+        '''
         word_site = "https://www.mit.edu/~ecprice/wordlist.10000"
         response = requests.get(word_site)
         words = response.content.decode().split('\n')
@@ -12,15 +16,38 @@ class WordleGame:
         self.attempts = 0
 
     def target_word_dictionary(self):
+        '''
+        Creates a dictionary that maps each letter in the target word to its frequency.
+
+        Returns:
+            dict: A dictionary with letters as keys and their frequencies as values.
+        '''
         letter_dictionary = {}
         for char in self.target_word:
             letter_dictionary[char] = letter_dictionary.get(char, 0) + 1
         return letter_dictionary
 
     def is_correct_guess(self, guess):
+        '''
+        Checks if the user's guess is the same as the target word.
+
+        guess: string, the user's guess for the target word.
+
+        Returns:
+            boolean: True if the guess is correct; False otherwise.
+        '''
         return guess == self.target_word
 
     def give_feedback(self, guess):
+        '''
+        Provides feedback for the user's guess by comparing it with the target word.
+
+        guess: string, the user's guess for the target word.
+
+        Returns:
+            tuple: A tuple containing the guess as a list of characters and a list of feedback
+                   characters ('G', 'Y', 'B') corresponding to each letter in the guess.
+        '''
         target_dict = self.target_word_dictionary()
         feedback = []
         for i in range(len(guess)):
@@ -35,6 +62,11 @@ class WordleGame:
         return [*guess], feedback
 
     def play(self):
+        '''
+        The main method to start the Wordle game. It prompts the user for guesses,
+        provides feedback, and continues until the user guesses the word correctly or
+        exhausts the allowed number of attempts.
+        '''
         while self.attempts < self.max_attempts:
             user_guess = input("Enter your 5-letter guess: ").lower()
 
