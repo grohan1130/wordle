@@ -10,4 +10,7 @@ Welcome to the Wordle Game in Python repository! This simple yet engaging text-b
   - Black (B) for letters not present in the target word.
 - The game ends when you guess the word correctly or exhaust all six attempts.
 
-
+## How to Run Code and Play the Game
+- Clone the repository
+- Run the program
+- Play by guessing words in the terminal
